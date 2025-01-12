@@ -1,0 +1,15 @@
+import schedule
+import time
+import random
+
+def optimize_mining():
+    new_frequency = random.randint(1000, 1500)
+    new_power = random.randint(200, 300)
+    print(f"Optimizing mining: Setting frequency to {new_frequency} MHz and power to {new_power} W.")
+    adjust_mining_machine("192.168.1.100", frequency=new_frequency, power=new_power)
+
+schedule.every(10).minutes.do(optimize_mining)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
