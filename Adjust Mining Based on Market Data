@@ -1,0 +1,17 @@
+import requests
+
+def get_crypto_price():
+    url = "https://api.coindesk.com/v1/bpi/currentprice/BTC.json"
+    response = requests.get(url)
+    data = response.json()
+    price = data["bpi"]["USD"]["rate"]
+    return price
+
+def adjust_mining_based_on_market():
+    price = get_crypto_price()
+    print(f"Current Bitcoin price: {price}")
+    if float(price.replace(",", "")) > 50000:
+        print("Bitcoin price is high, optimizing for better performance.")
+        adjust_mining_machine("192.168.1.100", frequency=1500, power=300)
+
+adjust_mining_based_on_market()
