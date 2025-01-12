@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kohanax AI Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .data-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .data-item {
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<h1>Kohanax AI Mining Dashboard</h1>
+
+<div class="data-container">
+    <div class="data-item">
+        <h3>Hashrate</h3>
+        <p id="hashrate">Loading...</p>
+    </div>
+    <div class="data-item">
+        <h3>Temperature</h3>
+        <p id="temperature">Loading...</p>
+    </div>
+    <div class="data-item">
+        <h3>Power Consumption</h3>
+        <p id="power">Loading...</p>
+    </div>
+</div>
+
+<script>
+    // Fetch mining machine data from API
+    axios.post('http://localhost:5000/predict', {
+        temperature: 60,
+        power_consumption: 2000,
+        voltage: 12,
+        fan_speed: 1500
+    })
+    .then(function (response) {
+        // Display results on the page
+        document.getElementById('hashrate').innerText = response.data.predicted_hashrate + " MH/s";
+        document.getElementById('temperature').innerText = "60 °C";
+        document.getElementById('power').innerText = "2000 W";
+    })
+    .catch(function (error) {
+        console.error("Error fetching data:", error);
+    });
+</script>
+
+</body>
+</html>
