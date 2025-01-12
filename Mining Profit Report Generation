@@ -1,0 +1,17 @@
+import pandas as pd
+
+# Example: Generate mining profit report
+def generate_profit_report(mining_data):
+    df = pd.DataFrame(mining_data)
+    df['profit'] = df['hash_rate'] * df['mining_pool_fee'] - df['power_consumption'] * df['electricity_cost']
+    return df[['timestamp', 'hash_rate', 'profit']]
+
+# Example data
+mining_data = [
+    {'timestamp': '2025-01-01 00:00', 'hash_rate': 1500, 'mining_pool_fee': 0.02, 'power_consumption': 300, 'electricity_cost': 0.1},
+    {'timestamp': '2025-01-01 01:00', 'hash_rate': 1550, 'mining_pool_fee': 0.02, 'power_consumption': 310, 'electricity_cost': 0.1}
+]
+
+# Generate and display report
+report = generate_profit_report(mining_data)
+print(report)
