@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kohanax AI Dashboard</title>
+    <script>
+        var socket = new WebSocket("ws://localhost:6789");
+
+        socket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            document.getElementById("hashrate").innerText = data.hash_rate + " MH/s";
+            document.getElementById("temperature").innerText = data.temperature + " °C";
+            document.getElementById("power").innerText = data.power_consumption + " W";
+        };
+    </script>
+</head>
+<body>
+
+<h1>Kohanax AI Mining Dashboard</h1>
+
+<div>
+    <h3>Hashrate: <span id="hashrate">Loading...</span></h3>
+    <h3>Temperature: <span id="temperature">Loading...</span></h3>
+    <h3>Power Consumption: <span id="power">Loading...</span></h3>
+</div>
+
+</body>
+</html>
