@@ -1,0 +1,22 @@
+from flask import Flask, jsonify, request
+import joblib
+
+# Load AI model
+model = joblib.load('kohanax_model.pkl')
+
+app = Flask(__name__)
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    
+    # Extract input features
+    features = np.array([data['temperature'], data['power_consumption'], data['voltage'], data['fan_speed']]).reshape(1, -1)
+    
+    # Get hash rate prediction
+    predicted_hashrate = model.predict(features)[0]
+    
+    return jsonify({'predicted_hashrate': predicted_hashrate})
+
+if __name__ == '__main__':
+    app.run(debug=True)
