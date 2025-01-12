@@ -1,0 +1,18 @@
+import random
+import time
+
+def get_mining_status():
+    return random.choice([True, False])  # Simulate random mining status
+
+def recover_mining_machine():
+    print("Attempting to recover the mining machine... Restarting.")
+    time.sleep(2)  # Simulate recovery time
+    print("Mining machine has been successfully recovered.")
+
+while True:
+    if not get_mining_status():
+        print("Warning: Mining machine failed!")
+        recover_mining_machine()
+    else:
+        print("Mining machine is running normally.")
+    time.sleep(5)
