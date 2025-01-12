@@ -1,0 +1,16 @@
+import requests
+
+# Example: Send command to mining machine to adjust power or frequency
+def adjust_mining_machine(ip, frequency=None, power=None):
+    url = f"http://{ip}/adjust_config"
+    data = {}
+    if frequency:
+        data['frequency'] = frequency
+    if power:
+        data['power'] = power
+    
+    response = requests.post(url, json=data)
+    if response.status_code == 200:
+        print(f"Successfully adjusted machine at {ip}")
+    else:
+        print(f"Failed to adjust machine at {ip}")
