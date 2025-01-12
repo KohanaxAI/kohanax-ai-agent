@@ -1,0 +1,21 @@
+import mysql.connector
+
+# Connect to the database
+db = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="your_password",
+    database="kohanax_ai"
+)
+
+cursor = db.cursor()
+
+# Example: Insert mining data into the database
+def insert_mining_data(hash_rate, temperature, power_consumption):
+    query = "INSERT INTO mining_data (hash_rate, temperature, power_consumption) VALUES (%s, %s, %s)"
+    cursor.execute(query, (hash_rate, temperature, power_consumption))
+    db.commit()
+    print("Data inserted successfully!")
+
+# Example usage
+insert_mining_data(1500, 60, 2000)
