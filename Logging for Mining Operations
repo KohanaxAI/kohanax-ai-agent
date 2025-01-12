@@ -1,0 +1,9 @@
+import logging
+import time
+
+logging.basicConfig(filename='kohanax_ai.log', level=logging.INFO)
+
+def log_mining_operation(message):
+    logging.info(f"{time.strftime('%Y-%m-%d %H:%M:%S')} - {message}")
+
+log_mining_operation("Successfully adjusted the mining frequency to 1200 MHz.")
